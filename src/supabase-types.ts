@@ -35,7 +35,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
-          }
+          },
         ]
       }
       Basket: {
@@ -94,6 +94,87 @@ export type Database = {
           nomCommune?: string | null
         }
         Relationships: []
+      }
+      Film: {
+        Row: {
+          cover: string | null
+          created_at: string
+          date_sortie: string | null
+          duree: string | null
+          id: number
+          nom_original: string | null
+          nom_traduit: string | null
+          synopsis: string | null
+        }
+        Insert: {
+          cover?: string | null
+          created_at?: string
+          date_sortie?: string | null
+          duree?: string | null
+          id?: number
+          nom_original?: string | null
+          nom_traduit?: string | null
+          synopsis?: string | null
+        }
+        Update: {
+          cover?: string | null
+          created_at?: string
+          date_sortie?: string | null
+          duree?: string | null
+          id?: number
+          nom_original?: string | null
+          nom_traduit?: string | null
+          synopsis?: string | null
+        }
+        Relationships: []
+      }
+      Genre: {
+        Row: {
+          created_at: string
+          id: number
+          nom: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          nom?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          nom?: string | null
+        }
+        Relationships: []
+      }
+      GenreDeFilm: {
+        Row: {
+          film_id: number
+          genre_id: number
+        }
+        Insert: {
+          film_id: number
+          genre_id: number
+        }
+        Update: {
+          film_id?: number
+          genre_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "genredefilm_film_id_fkey"
+            columns: ["film_id"]
+            isOneToOne: false
+            referencedRelation: "Film"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "genredefilm_genre_id_fkey"
+            columns: ["genre_id"]
+            isOneToOne: false
+            referencedRelation: "Genre"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       Maison: {
         Row: {
@@ -159,7 +240,37 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "quartier_commune"
             referencedColumns: ["id_Quartier"]
-          }
+          },
+        ]
+      }
+      members: {
+        Row: {
+          team_id: number
+          user_id: number
+        }
+        Insert: {
+          team_id: number
+          user_id: number
+        }
+        Update: {
+          team_id?: number
+          user_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "members_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
         ]
       }
       Quartier: {
@@ -195,8 +306,38 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "quartier_commune"
             referencedColumns: ["id"]
-          }
+          },
         ]
+      }
+      teams: {
+        Row: {
+          id: number
+          team_name: string | null
+        }
+        Insert: {
+          id?: number
+          team_name?: string | null
+        }
+        Update: {
+          id?: number
+          team_name?: string | null
+        }
+        Relationships: []
+      }
+      users: {
+        Row: {
+          id: number
+          name: string | null
+        }
+        Insert: {
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -222,14 +363,16 @@ export type Database = {
   }
 }
 
+type PublicSchema = Database[Extract<keyof Database, "public">]
+
 export type Tables<
   PublicTableNameOrOptions extends
-    | keyof (Database["public"]["Tables"] & Database["public"]["Views"])
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
@@ -237,67 +380,67 @@ export type Tables<
     }
     ? R
     : never
-  : PublicTableNameOrOptions extends keyof (Database["public"]["Tables"] &
-      Database["public"]["Views"])
-  ? (Database["public"]["Tables"] &
-      Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-    ? R
+  : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
     : never
-  : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
+    | keyof PublicSchema["Tables"]
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Insert: infer I
     }
     ? I
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
-    }
-    ? I
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
     : never
-  : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-    | keyof Database["public"]["Tables"]
+    | keyof PublicSchema["Tables"]
     | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-    : never = never
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
       Update: infer U
     }
     ? U
     : never
-  : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
-  ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
-    }
-    ? U
+  : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
     : never
-  : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-    | keyof Database["public"]["Enums"]
+    | keyof PublicSchema["Enums"]
     | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
     ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-    : never = never
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
-  : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
-  ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never

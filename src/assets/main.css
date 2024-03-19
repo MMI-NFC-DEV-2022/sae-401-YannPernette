@@ -1,3 +1,22 @@
+@import 'fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.darkenImg img {
+    transition: filter 0.3s ease;
+}
+
+.darkenImg:hover img {
+    filter: brightness(0.4);
+}
+
+.darkenImg:hover p {
+    opacity: 1;
+}

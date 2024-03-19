@@ -1,12 +1,3 @@
-export interface Film {
-  nom_original?: string;
-  nom_traduit?: string;
-  cover?: string;
-  duree?: string;
-  date_sortie?: Date;
-}
-
-
 export const colors = {
   "#000000": "Noir",
   "#FFFFFF": "Blanc",
