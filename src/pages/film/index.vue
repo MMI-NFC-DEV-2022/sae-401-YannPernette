@@ -18,7 +18,7 @@ const { data: Film, error } = await supabase
                 name: '/film/[id]',
                 params: { id: film.id },
             }">
-                <filmPreview />
+                <filmPreview v-bind="film" />
             </RouterLink>
         </div>
 </template>

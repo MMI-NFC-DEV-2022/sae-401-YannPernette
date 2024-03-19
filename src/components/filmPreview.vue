@@ -8,17 +8,18 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const films = ref<Film>(props.data ?? {});
+const prevfilms = ref<Film>(props.data ?? {});
 
 if (props.id !== undefined) {
     const { data, error } = await supabase.from("Film").select("*").eq("id", props.id).single();
     if (error) console.error("error", error);
-    else films.value = data;
+    else prevfilms.value = data;
 }
 </script>
 
 
 <template>
     <p>nom du film prev</p>
-    <h1 class="text-2xl">{{ films.nom_original }}</h1>
+    <h1 class="text-2xl">{{ prevfilms.nom_original }}</h1>
+    <img :src="prevfilms.cover" alt="">
 </template>
