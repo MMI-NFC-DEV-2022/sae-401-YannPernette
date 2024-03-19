@@ -10,7 +10,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const prevfilms = ref<Film & { Genre: any[] }>( {
+const prevfilms = ref<Film & { Genre: any[] }>({
     cover: null,
     created_at: "",
     date_sortie: null,
@@ -44,13 +44,18 @@ if (props.id !== undefined) {
 
 
 <template>
-    <div class="relative darkenImg flex flex-col items-center">
-        <p class="absolute z-10 top-0 text-white text-sm p-4 line-clamp-4 opacity-0 transition-opacity duration-300">{{
-            prevfilms.synopsis }}</p>
-        <img class="w-60 rounded-lg" :src="prevfilms.cover || undefined" alt="Cover Film">
+    <div class="darkenImg flex flex-col items-center">
+        <div class="relative">
+            <p
+                class="absolute z-10 top-0 text-white text-sm p-4 line-clamp-4 opacity-0 transition-opacity duration-300">
+                {{
+                    prevfilms.synopsis }}</p>
+            <img class="w-60 rounded-lg" :src="prevfilms.cover || undefined" alt="Cover Film">
+            <ul class="flex flex-wrap-reverse gap-2 absolute z-10 bottom-0 m-4 opacity-0 transition-opacity duration-300">
+                <li class="bg-white rounded-full py-1 px-3 text-xs" v-for="genre in prevfilms.Genre" :key="genre.id">{{ genre.nom }}</li>
+            </ul>
+        </div>
+
         <h1 class="mt-2 text-center text-2xl font-sora font-medium">{{ prevfilms.nom_traduit }}</h1>
-        <ul>
-            <li v-for="genre in prevfilms.Genre" :key="genre.id">{{ genre.nom }}</li>
-        </ul>
     </div>
 </template>

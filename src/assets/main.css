@@ -20,3 +20,7 @@ body {
 .darkenImg:hover p {
     opacity: 1;
 }
+
+.darkenImg:hover ul {
+    opacity: 1;
+}
