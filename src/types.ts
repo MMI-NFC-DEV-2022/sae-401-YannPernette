@@ -1,12 +1,9 @@
-export interface Basket {
-  semelle?: string;
-  empeigne?: string;
-  pointe?: string;
-  oeillet?: string;
-  bande?: string;
-  languette?: string;
-  lacet?: string;
-  trimestre?: string;
+export interface Film {
+  nom_original?: string;
+  nom_traduit?: string;
+  cover?: string;
+  duree?: string;
+  date_sortie?: Date;
 }
 
 
