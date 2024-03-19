@@ -10,7 +10,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const prevfilms = ref<Film>(props.data ?? {
+const prevfilms = ref<Film & { Genre: any[] }>( {
     cover: null,
     created_at: "",
     date_sortie: null,
@@ -19,6 +19,7 @@ const prevfilms = ref<Film>(props.data ?? {
     nom_original: null,
     nom_traduit: null,
     synopsis: null,
+    Genre: [],
 });
 
 if (props.id !== undefined) {
