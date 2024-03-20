@@ -2,6 +2,7 @@
 import type { Tables } from "@/supabase-types";
 import { ref } from "vue";
 import { supabase } from "@/supabase";
+import celebritePreview from "./celebritePreview.vue";
 
 type Film = Tables<'Film'>;
 
@@ -75,11 +76,14 @@ if (props.id !== undefined) {
         <div>
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Cast</h2>
 
-            <ul class="flex flex-wrap-reverse gap-14">
-                <li class="" v-for="celebrite in films.Celebrite"
-                    :key="celebrite.id">
-                    <img class="w-40 rounded-lg" :src="celebrite.portrait || undefined" alt="">
-                    <p class="font-medium pt-2">{{ celebrite.prenom }} {{ celebrite.nom }}</p>
+            <ul>
+                <li class="flex flex-wrap-reverse gap-14">
+                    <RouterLink v-for="celebrite in films.Celebrite" :key="celebrite.id" :to="{
+            name: '/celebrite/[id]',
+            params: { id: celebrite.id },
+        }">
+                        <celebritePreview v-bind="{ ...celebrite, id: celebrite.id.toString() }" />
+                    </RouterLink>
                 </li>
             </ul>
         </div>
