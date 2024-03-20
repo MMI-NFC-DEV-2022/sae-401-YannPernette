@@ -24,3 +24,8 @@ body {
 .darkenImg:hover ul {
     opacity: 1;
 }
+
+.bgHeader {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0) 100%);
+}
