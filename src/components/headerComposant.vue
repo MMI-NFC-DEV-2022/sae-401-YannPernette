@@ -26,11 +26,11 @@ import logo from './icon/logo.vue';
                 </li>
             </ul>
 
-            <ul class="flex uppercase font-poppins gap-3">
+            <ul class="flex uppercase font-poppins gap-4">
                 <li class="bg-white text-black rounded-sm px-2 py-1">
                     <RouterLink to="/">S'inscrire</RouterLink>
                 </li>
-                <li class="border rounded-sm px-2 py-1">
+                <li class="border rounded-sm px-3 py-1">
                     <RouterLink to="/">Se connecter</RouterLink>
                 </li>
             </ul>

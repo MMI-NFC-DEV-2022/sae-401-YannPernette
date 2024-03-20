@@ -3,6 +3,8 @@ import type { Tables } from "@/supabase-types";
 import { ref } from "vue";
 import { supabase } from "@/supabase";
 import celebritePreview from "./celebritePreview.vue";
+import { format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 type Film = Tables<'Film'>;
 
@@ -12,27 +14,36 @@ const props = defineProps<{
 }>();
 
 const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
-    cover: null,
-    created_at: "",
-    date_sortie: null,
-    duree: null,
-    id: 0,
-    nom_original: null,
-    nom_traduit: null,
-    synopsis: null,
-    banniere: null,
-    note: null,
-    Genre: [],
-    Celebrite: [],
+cover: null,
+created_at: "",
+date_sortie: null,
+duree: null,
+id: 0,
+nom_original: null,
+nom_traduit: null,
+synopsis: null,
+banniere: null,
+note: null,
+Genre: [],
+Celebrite: [],
+bande_originale: null,
+trailer: null,
+pays: null
 });
 
 if (props.id !== undefined) {
     const { data, error } = await supabase.from("Film").select(`
   id,
   nom_traduit,
+  nom_original,
   cover,
   banniere,
+  date_sortie,
+  duree,
+  note,
   synopsis, 
+  trailer,
+  bande_originale,
   Genre ( id, nom ),
   Celebrite ( id, prenom, nom, portrait )
 `)
@@ -41,11 +52,13 @@ if (props.id !== undefined) {
     else films.value = {
         ...data,
         created_at: "",
-        date_sortie: null,
-        duree: null,
-        nom_original: null,
-        note: null
+        pays: null,
     };
+}
+
+
+const formatDate = (date: string | number | Date) => {
+    return format(new Date(date), 'dd MMMM yyyy', { locale: fr })
 }
 </script>
 
@@ -53,27 +66,41 @@ if (props.id !== undefined) {
 
 <template>
 
-    <div class="h-[30%] overflow-hidden relative">
+    <div class="h-[30%] relative">
         <img class="w-screen h-96 object-cover brightness-50" :src="films.banniere || undefined" alt="">
 
-        <div class="absolute bottom-0">
-            <img class="h-80" :src="films.cover || undefined" alt="">
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex items-center text-white">
+            <div class="mb-[-65px] z-20">
+                <img class="h-72" :src="films.cover || undefined" alt="">
+            </div>
+
+            <div class="flex flex-col gap-4 ml-8">
+                <h1 class="font-sora font-semibold text-5xl">{{ films.nom_traduit }}</h1>
+                <h4 v-show="films.nom_original === null || films.nom_traduit" class="font-sora font-semibold text-2xl">({{ films.nom_original }})</h4>
+                <p class="text-xl">{{ formatDate(films.date_sortie || '') }}</p>
+                <ul class="flex flex-wrap-reverse gap-4">
+                    <li class="bg-white text-black rounded-full py-1 px-3" v-for="genre in films.Genre" :key="genre.id">
+                        {{
+            genre.nom }}</li>
+                </ul>
+            </div>
+
+            <div>
+                <p>{{ films.duree }}</p>
+                <p>{{ films.note }}</p>
+                <!-- <p>{{ films.pays ? films.pays.nom : '' }}</p> -->
+            </div>
         </div>
     </div>
 
     <div class="mx-[10%] mb-40">
 
-        <ul class="flex flex-wrap-reverse gap-2 m-4">
-            <li class="bg-white rounded-full py-1 px-3 text-xs" v-for="genre in films.Genre" :key="genre.id">{{
-            genre.nom }}</li>
-        </ul>
-
-        <div class="mb-16">
+        <div class="mt-28 mb-16">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Synopsis</h2>
-            <p>{{ films.synopsis }}</p>
+            <p class="max-w-[70%]">{{ films.synopsis }}</p>
         </div>
 
-        <div>
+        <div class="mb-20">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Cast</h2>
 
             <ul>
@@ -86,6 +113,22 @@ if (props.id !== undefined) {
                     </RouterLink>
                 </li>
             </ul>
+        </div>
+
+        <div class="flex justify-between">
+            <div class="w-[50%]">
+                <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Trailer</h2>
+                <iframe width="100%" height="400" :src="films.trailer ?? undefined"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+
+            <div class="w-[40%]">
+                <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Bande originale</h2>
+                <iframe :src="films.bande_originale ?? undefined" width="100%"
+                    height="400" frameborder="0" allowtransparency="true"></iframe>
+            </div>
         </div>
 
     </div>

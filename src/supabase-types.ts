@@ -163,6 +163,7 @@ export type Database = {
       }
       Film: {
         Row: {
+          bande_originale: string | null
           banniere: string | null
           cover: string | null
           created_at: string
@@ -172,9 +173,12 @@ export type Database = {
           nom_original: string | null
           nom_traduit: string | null
           note: number | null
+          pays: number | null
           synopsis: string | null
+          trailer: string | null
         }
         Insert: {
+          bande_originale?: string | null
           banniere?: string | null
           cover?: string | null
           created_at?: string
@@ -184,9 +188,12 @@ export type Database = {
           nom_original?: string | null
           nom_traduit?: string | null
           note?: number | null
+          pays?: number | null
           synopsis?: string | null
+          trailer?: string | null
         }
         Update: {
+          bande_originale?: string | null
           banniere?: string | null
           cover?: string | null
           created_at?: string
@@ -196,9 +203,19 @@ export type Database = {
           nom_original?: string | null
           nom_traduit?: string | null
           note?: number | null
+          pays?: number | null
           synopsis?: string | null
+          trailer?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "public_Film_pays_fkey"
+            columns: ["pays"]
+            isOneToOne: false
+            referencedRelation: "Pays"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       Genre: {
         Row: {
@@ -344,6 +361,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      Pays: {
+        Row: {
+          created_at: string
+          drapeau: string | null
+          id: number
+          nom: string | null
+        }
+        Insert: {
+          created_at?: string
+          drapeau?: string | null
+          id?: number
+          nom?: string | null
+        }
+        Update: {
+          created_at?: string
+          drapeau?: string | null
+          id?: number
+          nom?: string | null
+        }
+        Relationships: []
       }
       Quartier: {
         Row: {
