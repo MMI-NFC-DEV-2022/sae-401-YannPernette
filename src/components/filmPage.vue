@@ -10,7 +10,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const films = ref<Film & { Genre: any[] }>({
+const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
     cover: null,
     created_at: "",
     date_sortie: null,
@@ -19,9 +19,10 @@ const films = ref<Film & { Genre: any[] }>({
     nom_original: null,
     nom_traduit: null,
     synopsis: null,
-    Genre: [],
     banniere: null,
-    note: null
+    note: null,
+    Genre: [],
+    Celebrite: [],
 });
 
 if (props.id !== undefined) {
@@ -31,7 +32,8 @@ if (props.id !== undefined) {
   cover,
   banniere,
   synopsis, 
-  Genre ( id, nom )
+  Genre ( id, nom ),
+  Celebrite ( id, prenom, nom, portrait )
 `)
         .eq("id", props.id).single();
     if (error) console.error("error", error);
@@ -41,11 +43,11 @@ if (props.id !== undefined) {
         date_sortie: null,
         duree: null,
         nom_original: null,
-        // banniere: null,
         note: null
     };
 }
 </script>
+
 
 
 <template>
@@ -58,21 +60,28 @@ if (props.id !== undefined) {
         </div>
     </div>
 
-    <div class="mx-[10%]">
+    <div class="mx-[10%] mb-40">
 
         <ul class="flex flex-wrap-reverse gap-2 m-4">
             <li class="bg-white rounded-full py-1 px-3 text-xs" v-for="genre in films.Genre" :key="genre.id">{{
             genre.nom }}</li>
         </ul>
 
-        <div class="mb-20">
-            <h2 class="font-poppins font-semibold text-xl uppercase">Synopsis</h2>
+        <div class="mb-16">
+            <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Synopsis</h2>
             <p>{{ films.synopsis }}</p>
         </div>
 
         <div>
-            <h2 class="font-poppins font-semibold text-xl uppercase">Cast</h2>
+            <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Cast</h2>
 
+            <ul class="flex flex-wrap-reverse gap-14">
+                <li class="" v-for="celebrite in films.Celebrite"
+                    :key="celebrite.id">
+                    <img class="w-40 rounded-lg" :src="celebrite.portrait || undefined" alt="">
+                    <p class="font-medium pt-2">{{ celebrite.prenom }} {{ celebrite.nom }}</p>
+                </li>
+            </ul>
         </div>
 
     </div>

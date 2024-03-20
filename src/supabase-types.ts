@@ -116,6 +116,7 @@ export type Database = {
           id: number
           lieu_naissance: string | null
           nom: string | null
+          portrait: string | null
           prenom: string | null
         }
         Insert: {
@@ -126,6 +127,7 @@ export type Database = {
           id?: number
           lieu_naissance?: string | null
           nom?: string | null
+          portrait?: string | null
           prenom?: string | null
         }
         Update: {
@@ -136,6 +138,7 @@ export type Database = {
           id?: number
           lieu_naissance?: string | null
           nom?: string | null
+          portrait?: string | null
           prenom?: string | null
         }
         Relationships: []
