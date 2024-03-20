@@ -77,6 +77,69 @@ export type Database = {
         }
         Relationships: []
       }
+      CastDeFilm: {
+        Row: {
+          cast_id: number
+          film_id: number
+        }
+        Insert: {
+          cast_id: number
+          film_id: number
+        }
+        Update: {
+          cast_id?: number
+          film_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "castdefilm_cast_id_fkey"
+            columns: ["cast_id"]
+            isOneToOne: false
+            referencedRelation: "Celebrite"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "castdefilm_film_id_fkey"
+            columns: ["film_id"]
+            isOneToOne: false
+            referencedRelation: "Film"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      Celebrite: {
+        Row: {
+          created_at: string
+          date_mort: string | null
+          date_naissance: string | null
+          genre: string | null
+          id: number
+          lieu_naissance: string | null
+          nom: string | null
+          prenom: string | null
+        }
+        Insert: {
+          created_at?: string
+          date_mort?: string | null
+          date_naissance?: string | null
+          genre?: string | null
+          id?: number
+          lieu_naissance?: string | null
+          nom?: string | null
+          prenom?: string | null
+        }
+        Update: {
+          created_at?: string
+          date_mort?: string | null
+          date_naissance?: string | null
+          genre?: string | null
+          id?: number
+          lieu_naissance?: string | null
+          nom?: string | null
+          prenom?: string | null
+        }
+        Relationships: []
+      }
       Commune: {
         Row: {
           created_at: string
@@ -97,6 +160,7 @@ export type Database = {
       }
       Film: {
         Row: {
+          banniere: string | null
           cover: string | null
           created_at: string
           date_sortie: string | null
@@ -104,9 +168,11 @@ export type Database = {
           id: number
           nom_original: string | null
           nom_traduit: string | null
+          note: number | null
           synopsis: string | null
         }
         Insert: {
+          banniere?: string | null
           cover?: string | null
           created_at?: string
           date_sortie?: string | null
@@ -114,9 +180,11 @@ export type Database = {
           id?: number
           nom_original?: string | null
           nom_traduit?: string | null
+          note?: number | null
           synopsis?: string | null
         }
         Update: {
+          banniere?: string | null
           cover?: string | null
           created_at?: string
           date_sortie?: string | null
@@ -124,6 +192,7 @@ export type Database = {
           id?: number
           nom_original?: string | null
           nom_traduit?: string | null
+          note?: number | null
           synopsis?: string | null
         }
         Relationships: []

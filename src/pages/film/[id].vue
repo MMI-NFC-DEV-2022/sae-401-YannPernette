@@ -7,7 +7,7 @@ const route = useRoute('/film/[id]');
 
 
 <template>
-    <div class="py-20">
+    <div class="">
         <filmPage :id="route.params.id" />
     </div>
 </template>

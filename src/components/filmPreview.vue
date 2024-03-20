@@ -20,6 +20,8 @@ const prevfilms = ref<Film & { Genre: any[] }>({
     nom_traduit: null,
     synopsis: null,
     Genre: [],
+    banniere: null,
+    note: null
 });
 
 if (props.id !== undefined) {
@@ -38,6 +40,8 @@ if (props.id !== undefined) {
         date_sortie: null,
         duree: null,
         nom_original: null,
+        banniere: null,
+        note: null
     };
 }
 </script>

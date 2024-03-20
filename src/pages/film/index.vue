@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import filmPreview from "@/components/filmPreview.vue";
 import { supabase } from "@/supabase";
 console.log("supabase :", supabase); // pour vérifier et "garder" supabase dans le code
