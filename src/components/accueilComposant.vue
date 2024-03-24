@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import Logo from '../components/icon/Logo.vue';
 import ArrowScroll from '../components/icon/ArrowScroll.vue';
-
 import filmPreview from "@/components/filmPreview.vue";
+import celebritePreview from "@/components/celebritePreview.vue";
+import collectionPreview from "@/components/collectionPreview.vue";
+
 import { supabase } from "@/supabase";
 console.log("supabase :", supabase); // pour vérifier et "garder" supabase dans le code
-const { data: Film, error } = await supabase
-    .from('Film')
+const { data: Accueil, error } = await supabase
+    .from('Film', 'Celebrite')
     .select('*')
     .limit(3);
+
+const { data: Collection, error: collectionError } = await supabase
+    .from('Collection')
+    .select('*')
+    .limit(1);
 </script>
 
 <template>
@@ -34,11 +41,11 @@ const { data: Film, error } = await supabase
 
 
     <div class="mx-[10%] mb-20">
-        <h1 id="Accueil" class="pt-20 pb-14 text-3xl font-sora font-bold uppercase tracking-wider">Sélection des films
-            du moment</h1>
+        <h2 id="Accueil" class="pt-20 pb-10 text-3xl font-sora font-bold uppercase tracking-wider">Sélection des films
+            du moment</h2>
 
         <div class="flex flex-wrap gap-20 mb-6">
-            <RouterLink class="w-64" v-for="film in Film" :key="film.id" :to="{
+            <RouterLink class="w-64" v-for="film in Accueil" :key="film.id" :to="{
                 name: '/film/[id]',
                 params: { id: film.id },
             }">
@@ -48,8 +55,46 @@ const { data: Film, error } = await supabase
 
         <RouterLink to="/film">
             <div
-                class="bg-[#FFCB47] hover:bg-black hover:text-[#FFCB47] transition-colors duration-300 rounded-md px-5 py-2 w-fit">
+                class="ml-2 bg-[#FFCB47] hover:bg-black hover:text-[#FFCB47] transition-colors duration-300 rounded-md px-5 py-2 w-fit">
                 <p class="text-2xl">Voir plus de films</p>
+            </div>
+        </RouterLink>
+
+
+        <h2 id="Accueil" class="pt-28 pb-10 text-3xl font-sora font-bold uppercase tracking-wider">Sélection des
+            célébrités
+            du moment</h2>
+
+        <div class="flex flex-wrap gap-20 mb-6">
+            <RouterLink class="w-64" v-for="celebrite in Accueil" :key="celebrite.id" :to="{
+                name: '/celebrite/[id]',
+                params: { id: celebrite.id },
+            }">
+                <celebritePreview v-bind="{ ...celebrite, id: celebrite.id.toString() }" />
+            </RouterLink>
+        </div>
+
+        <RouterLink to="/celebrite">
+            <div
+                class="ml-2 bg-[#FFCB47] hover:bg-black hover:text-[#FFCB47] transition-colors duration-300 rounded-md px-5 py-2 w-fit">
+                <p class="text-2xl">Voir plus de célébrités</p>
+            </div>
+        </RouterLink>
+
+
+        <h2 id="Accueil" class="pt-28 pb-10 text-3xl font-sora font-bold uppercase tracking-wider">Collection choisie
+            par la communauté</h2>
+
+        <div class="flex flex-col gap-20 mb-6">
+            <div class="" v-for="collection in Collection" :key="collection.id">
+                <collectionPreview v-bind="{ ...collection, id: collection.id.toString() }" />
+            </div>
+        </div>
+
+        <RouterLink to="/collection">
+            <div
+                class="ml-2 bg-[#FFCB47] hover:bg-black hover:text-[#FFCB47] transition-colors duration-300 rounded-md px-5 py-2 w-fit">
+                <p class="text-2xl">Voir plus de collections</p>
             </div>
         </RouterLink>
     </div>
