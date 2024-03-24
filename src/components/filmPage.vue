@@ -14,7 +14,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
+const films = ref<Film & { Genre: any[] } & { Celebrite: any[] } & { Pays: any[] }>({
     cover: null,
     created_at: "",
     date_sortie: null,
@@ -27,6 +27,7 @@ const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
     note: null,
     Genre: [],
     Celebrite: [],
+    Pays: [],
     bande_originale: null,
     trailer: null,
     pays: null
@@ -45,6 +46,7 @@ if (props.id !== undefined) {
   synopsis, 
   trailer,
   bande_originale,
+  Pays ( id, nom, drapeau ),
   Genre ( id, nom ),
   Celebrite ( id, prenom, nom, portrait )
 `)
@@ -77,7 +79,8 @@ const formatDate = (date: string | number | Date) => {
 
             <div class="flex flex-col gap-4">
                 <h1 class="font-sora font-semibold text-5xl">{{ films.nom_traduit }}</h1>
-                <h4 v-show="films.nom_original !== null && films.nom_original !== films.nom_traduit" class="font-sora font-semibold text-2xl">
+                <h4 v-show="films.nom_original !== null && films.nom_original !== films.nom_traduit"
+                    class="font-sora font-semibold text-2xl">
                     ({{ films.nom_original }})
                 </h4>
                 <p class="text-xl">{{ formatDate(films.date_sortie || '') }}</p>
@@ -89,12 +92,16 @@ const formatDate = (date: string | number | Date) => {
             </div>
 
             <div class="flex flex-col gap-6">
-                <!-- <p>{{ films.pays ? films.pays.nom : '' }}</p> -->
+                <div class="flex gap-4 items-center">
+                    <img class="w-10" :src="films.Pays.drapeau ?? undefined" alt="">
+                    <p>{{ films.Pays.nom }}</p>
+                </div>
                 <div class="flex gap-2 items-center font-light text-lg">
                     <Horloge class="w-10" />
                     <p>{{ films.duree }}</p>
                 </div>
-                <p class="text-4xl font-sora border-2 py-3 px-4 rounded-lg">{{ films.note }} <span class="text-lg font-light">/ 10</span></p>
+                <p class="text-4xl font-sora border-2 py-3 px-4 rounded-lg">{{ films.note }} <span
+                        class="text-lg font-light">/ 10</span></p>
             </div>
         </div>
     </div>
