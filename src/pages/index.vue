@@ -1,6 +1,9 @@
-<template>
-  <h1 class="pt-40">Salut je suis l'accueil</h1>
+<script setup lang="ts">
+import AccueilComposant from '../components/AccueilComposant.vue';
+</script>
 
-  <RouterLink to="/film">Voir les films</RouterLink>
-  <RouterLink to="/celebrite">Voir les célébrités</RouterLink>
+<template>
+  <div>
+    <AccueilComposant />
+  </div>
 </template>

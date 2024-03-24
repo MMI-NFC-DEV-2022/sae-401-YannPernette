@@ -5,6 +5,10 @@
 @tailwind utilities;
 
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
 }
@@ -29,3 +33,20 @@ body {
     background: rgb(0, 0, 0);
     background: linear-gradient(180deg, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0) 100%);
 }
+
+
+@keyframes slideUp {
+    0% {
+      transform: translateY(50%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(50%);
+    }
+  }
+  
+  .slideUp {
+    animation: slideUp 2s infinite;
+  }
