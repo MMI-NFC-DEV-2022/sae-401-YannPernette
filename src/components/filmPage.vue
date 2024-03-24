@@ -5,6 +5,7 @@ import { supabase } from "@/supabase";
 import celebritePreview from "./celebritePreview.vue";
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
+import Horloge from '@/components/icon/Horloge.vue';
 
 type Film = Tables<'Film'>;
 
@@ -14,21 +15,21 @@ const props = defineProps<{
 }>();
 
 const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
-cover: null,
-created_at: "",
-date_sortie: null,
-duree: null,
-id: 0,
-nom_original: null,
-nom_traduit: null,
-synopsis: null,
-banniere: null,
-note: null,
-Genre: [],
-Celebrite: [],
-bande_originale: null,
-trailer: null,
-pays: null
+    cover: null,
+    created_at: "",
+    date_sortie: null,
+    duree: null,
+    id: 0,
+    nom_original: null,
+    nom_traduit: null,
+    synopsis: null,
+    banniere: null,
+    note: null,
+    Genre: [],
+    Celebrite: [],
+    bande_originale: null,
+    trailer: null,
+    pays: null
 });
 
 if (props.id !== undefined) {
@@ -69,26 +70,31 @@ const formatDate = (date: string | number | Date) => {
     <div class="h-[30%] relative">
         <img class="w-screen h-96 object-cover brightness-50" :src="films.banniere || undefined" alt="">
 
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex items-center text-white">
+        <div class="absolute bottom-0 w-full justify-center flex gap-20 items-center text-white">
             <div class="mb-[-65px] z-20">
                 <img class="h-72" :src="films.cover || undefined" alt="">
             </div>
 
-            <div class="flex flex-col gap-4 ml-8">
+            <div class="flex flex-col gap-4">
                 <h1 class="font-sora font-semibold text-5xl">{{ films.nom_traduit }}</h1>
-                <h4 v-show="films.nom_original === null || films.nom_traduit" class="font-sora font-semibold text-2xl">({{ films.nom_original }})</h4>
+                <h4 v-show="films.nom_original !== null && films.nom_original !== films.nom_traduit" class="font-sora font-semibold text-2xl">
+                    ({{ films.nom_original }})
+                </h4>
                 <p class="text-xl">{{ formatDate(films.date_sortie || '') }}</p>
                 <ul class="flex flex-wrap-reverse gap-4">
                     <li class="bg-white text-black rounded-full py-1 px-3" v-for="genre in films.Genre" :key="genre.id">
-                        {{
-            genre.nom }}</li>
+                        {{ genre.nom }}
+                    </li>
                 </ul>
             </div>
 
-            <div>
-                <p>{{ films.duree }}</p>
-                <p>{{ films.note }}</p>
+            <div class="flex flex-col gap-6">
                 <!-- <p>{{ films.pays ? films.pays.nom : '' }}</p> -->
+                <div class="flex gap-2 items-center font-light text-lg">
+                    <Horloge class="w-10" />
+                    <p>{{ films.duree }}</p>
+                </div>
+                <p class="text-4xl font-sora border-2 py-3 px-4 rounded-lg">{{ films.note }} <span class="text-lg font-light">/ 10</span></p>
             </div>
         </div>
     </div>
@@ -118,16 +124,16 @@ const formatDate = (date: string | number | Date) => {
         <div class="flex justify-between">
             <div class="w-[50%]">
                 <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Trailer</h2>
-                <iframe width="100%" height="400" :src="films.trailer ?? undefined"
-                    title="YouTube video player" frameborder="0"
+                <iframe width="100%" height="400" :src="films.trailer ?? undefined" title="YouTube video player"
+                    frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen></iframe>
             </div>
 
             <div class="w-[40%]">
                 <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Bande originale</h2>
-                <iframe :src="films.bande_originale ?? undefined" width="100%"
-                    height="400" frameborder="0" allowtransparency="true"></iframe>
+                <iframe :src="films.bande_originale ?? undefined" width="100%" height="400" frameborder="0"
+                    allowtransparency="true"></iframe>
             </div>
         </div>
 

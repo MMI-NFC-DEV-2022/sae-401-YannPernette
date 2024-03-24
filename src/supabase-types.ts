@@ -143,6 +143,57 @@ export type Database = {
         }
         Relationships: []
       }
+      Collection: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: number
+          nom: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          nom?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          nom?: string | null
+        }
+        Relationships: []
+      }
+      CollectionDeFilm: {
+        Row: {
+          collection_id: number
+          film_id: number
+        }
+        Insert: {
+          collection_id: number
+          film_id: number
+        }
+        Update: {
+          collection_id?: number
+          film_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "collectiondefilm_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "Collection"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collectiondefilm_film_id_fkey"
+            columns: ["film_id"]
+            isOneToOne: false
+            referencedRelation: "Film"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       Commune: {
         Row: {
           created_at: string
@@ -332,36 +383,6 @@ export type Database = {
           },
         ]
       }
-      members: {
-        Row: {
-          team_id: number
-          user_id: number
-        }
-        Insert: {
-          team_id: number
-          user_id: number
-        }
-        Update: {
-          team_id?: number
-          user_id?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "members_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       Pays: {
         Row: {
           created_at: string
@@ -418,36 +439,6 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
-      }
-      teams: {
-        Row: {
-          id: number
-          team_name: string | null
-        }
-        Insert: {
-          id?: number
-          team_name?: string | null
-        }
-        Update: {
-          id?: number
-          team_name?: string | null
-        }
-        Relationships: []
-      }
-      users: {
-        Row: {
-          id: number
-          name: string | null
-        }
-        Insert: {
-          id?: number
-          name?: string | null
-        }
-        Update: {
-          id?: number
-          name?: string | null
-        }
-        Relationships: []
       }
     }
     Views: {

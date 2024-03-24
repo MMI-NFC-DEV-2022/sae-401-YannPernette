@@ -11,17 +11,20 @@ const props = defineProps<{
 }>();
 
 const prevfilms = ref<Film & { Genre: any[] }>({
-    cover: null,
-    created_at: "",
-    date_sortie: null,
-    duree: null,
-    id: 0,
-    nom_original: null,
-    nom_traduit: null,
-    synopsis: null,
-    Genre: [],
-    banniere: null,
-    note: null
+cover: null,
+created_at: "",
+date_sortie: null,
+duree: null,
+id: 0,
+nom_original: null,
+nom_traduit: null,
+synopsis: null,
+Genre: [],
+banniere: null,
+note: null,
+bande_originale: null,
+pays: null,
+trailer: null
 });
 
 if (props.id !== undefined) {
@@ -41,7 +44,10 @@ if (props.id !== undefined) {
         duree: null,
         nom_original: null,
         banniere: null,
-        note: null
+        note: null,
+        bande_originale: null,
+        pays: null,
+        trailer: null
     };
 }
 </script>

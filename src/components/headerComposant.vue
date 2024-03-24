@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import logo from './icon/logo.vue';
+import Logo from '@/components/icon/Logo.vue';
 </script>
 
 <template>
     <header>
         <nav
-            class="fixed z-50 bgHeader text-white flex items-center justify-between w-full px-5 py-2 uppercase font-light tracking-wider">
+            class="fixed z-50 bgHeader text-white flex items-center justify-between w-full px-5 pt-2 pb-4 uppercase font-light tracking-wider">
 
             <RouterLink to="/">
                 <logo class="w-16" color="white" />
@@ -19,7 +19,7 @@ import logo from './icon/logo.vue';
                     <RouterLink to="/celebrite">Célébrités</RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/">Collections</RouterLink>
+                    <RouterLink to="/collection">Collections</RouterLink>
                 </li>
                 <li>
                     <RouterLink to="/">Genres</RouterLink>
