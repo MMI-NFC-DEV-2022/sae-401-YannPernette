@@ -21,5 +21,7 @@ if (props.id !== undefined) {
 
 
 <template>
-    <div>{{ prevgenres.nom }}</div>
+    <div class="rounded-full px-5 py-2 border-[3px] border-black hover:text-white hover:bg-black transition-colors duration-300">
+        <h1 class="text-2xl font-sora font-medium">{{ prevgenres.nom }}</h1>
+    </div>
 </template>

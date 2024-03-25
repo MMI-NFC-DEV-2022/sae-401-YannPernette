@@ -14,7 +14,7 @@ const { data: Genre, error } = await supabase
     <div class="mx-[10%] pt-20">
         <h1 class="py-20 text-3xl font-sora font-bold uppercase tracking-wider">Tous les genres</h1>
 
-        <div class="flex flex-wrap gap-20">
+        <div class="flex flex-wrap gap-10">
             <RouterLink v-for="genre in Genre" :key="genre.id" :to="{
                 name: '/film/[id]',
                 params: { id: genre.id },
