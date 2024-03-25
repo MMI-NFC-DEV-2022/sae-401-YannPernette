@@ -225,11 +225,6 @@ export type Database = {
           nom_traduit: string | null
           note: number | null
           pays: number | null
-          Pays: {
-            id: number | null;
-            nom: string | null;
-            drapeau: string | null;
-          };
           synopsis: string | null
           trailer: string | null
         }
@@ -441,6 +436,86 @@ export type Database = {
             columns: ["id_Commune"]
             isOneToOne: false
             referencedRelation: "quartier_commune"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      Support: {
+        Row: {
+          created_at: string
+          date_sortie: string | null
+          format_audio: string | null
+          format_video: string | null
+          id: number
+          id_film: number | null
+          image_type: string | null
+          is_location_sponsor: boolean | null
+          is_physique: boolean | null
+          is_vente_sponsor: boolean | null
+          langues_audio: string | null
+          langues_sous_titres: string | null
+          lien_location: string | null
+          lien_vente: string | null
+          location_dispo: boolean | null
+          note: number | null
+          prix_location: number | null
+          prix_vente: number | null
+          type: string | null
+          vente_dispo: boolean | null
+          version_film: string | null
+        }
+        Insert: {
+          created_at?: string
+          date_sortie?: string | null
+          format_audio?: string | null
+          format_video?: string | null
+          id?: number
+          id_film?: number | null
+          image_type?: string | null
+          is_location_sponsor?: boolean | null
+          is_physique?: boolean | null
+          is_vente_sponsor?: boolean | null
+          langues_audio?: string | null
+          langues_sous_titres?: string | null
+          lien_location?: string | null
+          lien_vente?: string | null
+          location_dispo?: boolean | null
+          note?: number | null
+          prix_location?: number | null
+          prix_vente?: number | null
+          type?: string | null
+          vente_dispo?: boolean | null
+          version_film?: string | null
+        }
+        Update: {
+          created_at?: string
+          date_sortie?: string | null
+          format_audio?: string | null
+          format_video?: string | null
+          id?: number
+          id_film?: number | null
+          image_type?: string | null
+          is_location_sponsor?: boolean | null
+          is_physique?: boolean | null
+          is_vente_sponsor?: boolean | null
+          langues_audio?: string | null
+          langues_sous_titres?: string | null
+          lien_location?: string | null
+          lien_vente?: string | null
+          location_dispo?: boolean | null
+          note?: number | null
+          prix_location?: number | null
+          prix_vente?: number | null
+          type?: string | null
+          vente_dispo?: boolean | null
+          version_film?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "public_Support_id_film_fkey"
+            columns: ["id_film"]
+            isOneToOne: false
+            referencedRelation: "Film"
             referencedColumns: ["id"]
           },
         ]

@@ -3,6 +3,7 @@ import type { Tables } from "@/supabase-types";
 import { ref } from "vue";
 import { supabase } from "@/supabase";
 import celebritePreview from "./celebritePreview.vue";
+import supportPreview from "./supportPreview.vue";
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import Horloge from '@/components/icon/Horloge.vue';
@@ -14,7 +15,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
+const films = ref<Film & { Genre: any[] } & { Celebrite: any[] } & { Support: any[] }>({
 cover: null,
 created_at: "",
 date_sortie: null,
@@ -27,6 +28,7 @@ banniere: null,
 note: null,
 Genre: [],
 Celebrite: [],
+Support: [],
 bande_originale: null,
 trailer: null,
 pays: null,
@@ -34,13 +36,13 @@ Pays: {
 id: 0,
 nom: "",
 drapeau: null
-}
+},
 });
 
 if (props.id !== undefined) {
-    const { data, error } = await supabase.from("Film").select(`*, Genre ( * ), Celebrite ( * ), Pays ( * )`).eq("id", props.id).single();
+    const { data, error } = await supabase.from("Film").select(`*, Genre ( * ), Celebrite ( * ), Support ( * ), Pays ( * )`).eq("id", props.id).single();
     if (error) console.error("error", error);
-    else films.value = data as unknown as Film & { Genre: any[] } & { Celebrite: any[] } & { Pays: any[] };
+    else films.value = data as unknown as Film & { Genre: any[] } & { Celebrite: any[] } & { Support: any[] } & { Pays: any[] };
 }
 
 
@@ -77,7 +79,7 @@ const formatDate = (date: string | number | Date) => {
 
             <div class="flex flex-col gap-6">
                 <div class="flex gap-4 items-center">
-                    <img class="w-10" :src="(films.Pays.drapeau) || undefined" alt="">
+                    <img class="w-10" :src="(films.Pays.drapeau) || undefined" alt="Drapeau du pays d'origine">
                     <p>{{ films.Pays.nom }}</p>
                 </div>
                 <div class="flex gap-2 items-center font-light text-lg">
@@ -110,6 +112,14 @@ const formatDate = (date: string | number | Date) => {
                     </RouterLink>
                 </li>
             </ul>
+        </div>
+
+        <div class="mb-20">
+            <h2 class="font-poppins font-semibold text-3xl uppercase mb-8">Où regarder ce film ?</h2>
+            <h4 class="font-semibold text-2xl mb-6">Supports physiques</h4>
+            <div v-for="support in films.Support" :key="support.id">
+                <supportPreview v-if="support.is_physique" v-bind="{ ...support, id: support.id.toString() }" />
+            </div>
         </div>
 
         <div class="flex justify-between">
