@@ -247,6 +247,11 @@ export type Database = {
           pays?: number | null
           synopsis?: string | null
           trailer?: string | null
+          Pays: {
+            id: number | null;
+            nom: string | null;
+            drapeau: string | null;
+          };
         }
         Update: {
           bande_originale?: string | null
@@ -262,6 +267,11 @@ export type Database = {
           pays?: number | null
           synopsis?: string | null
           trailer?: string | null
+          Pays: {
+            id: number | null;
+            nom: string | null;
+            drapeau: string | null;
+          };
         }
         Relationships: [
           {
@@ -468,6 +478,11 @@ export type Database = {
           type: string | null
           vente_dispo: boolean | null
           version_film: string | null
+          Film: {
+            id: number | null;
+            nom_traduit: string | null;
+            cover: string | null;
+          };
         }
         Insert: {
           created_at?: string

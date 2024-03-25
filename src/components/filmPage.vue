@@ -7,6 +7,8 @@ import supportPreview from "./supportPreview.vue";
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import Horloge from '@/components/icon/Horloge.vue';
+import User from '@/components/icon/User.vue';
+import Star from "@/components/icon/Star.vue";
 
 type Film = Tables<'Film'>;
 
@@ -151,7 +153,7 @@ const formatDate = (date: string | number | Date) => {
             </div>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between mb-20">
             <div class="w-[50%]">
                 <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Trailer</h2>
                 <iframe width="100%" height="400" :src="films.trailer ?? undefined" title="YouTube video player"
@@ -167,5 +169,61 @@ const formatDate = (date: string | number | Date) => {
             </div>
         </div>
 
+        <div>
+            <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Avis de la communauté</h2>
+
+            <div class="flex gap-10">
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

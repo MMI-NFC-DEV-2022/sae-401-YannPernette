@@ -11,7 +11,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const prevsupports = ref<Support & { Film: any[] }>({
+const prevsupports = ref<Support>({
     created_at: "",
     date_sortie: null,
     format_audio: null,
@@ -33,7 +33,11 @@ const prevsupports = ref<Support & { Film: any[] }>({
     type: null,
     vente_dispo: null,
     version_film: null,
-    Film: []
+    Film: {
+        id: 0,
+        nom_traduit: "",
+        cover: null
+    },
 });
 
 if (props.id !== undefined) {

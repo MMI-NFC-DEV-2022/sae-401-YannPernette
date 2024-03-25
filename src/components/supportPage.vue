@@ -3,6 +3,7 @@ import type { Tables } from "@/supabase-types";
 import { ref } from "vue";
 import { supabase } from "@/supabase";
 import Star from "@/components/icon/Star.vue";
+import User from '@/components/icon/User.vue';
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 
@@ -13,7 +14,7 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const supports = ref<Support & { Film: any[] }>({
+const supports = ref<Support>({
     created_at: "",
     date_sortie: null,
     format_audio: null,
@@ -35,7 +36,11 @@ const supports = ref<Support & { Film: any[] }>({
     type: null,
     vente_dispo: null,
     version_film: null,
-    Film: []
+    Film: {
+        id: 0,
+        nom_traduit: "",
+        cover: null
+    },
 });
 
 if (props.id !== undefined) {
@@ -54,7 +59,7 @@ const formatDate = (date: string | number | Date) => {
     <div class="flex justify-center items-center gap-24">
         <div class="flex flex-col gap-3 items-center">
             <div class="relative flex flex-col items-center">
-                <img class="w-60 rounded-t-lg" :src="supports.Film.cover" alt="">
+                <img class="w-60 rounded-t-lg" :src="supports.Film.cover ?? ''" alt="">
                 <div class="absolute bottom-0 backdrop-blur-md">
                     <img class="w-full" :src="supports.image_type ?? ''" alt="">
                 </div>
@@ -121,4 +126,61 @@ const formatDate = (date: string | number | Date) => {
             </div>
         </div>
     </div>
+
+    <div class="mx-[10%] mt-28">
+            <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Avis de la communauté</h2>
+
+            <div class="flex gap-10">
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
+                    <div class="flex gap-4">
+                        <User class="border border-black rounded-full size-10" />
+                        <div class="flex flex-col leading-tight">
+                            <p class="font-medium">Guillaume Le-Très-Caissier</p>
+                            <p class="italic">le 25 mars 2024</p>
+                        </div>
+                    </div>
+                    <p class="text-sm">MovieSpotter est incroyable ! Je découvre rapidement où acheter mes films
+                        préférés grâce à leurs recommandations personnalisées. La transparence sur les liens affiliés
+                        est un gros plus. Merci MovieSpotter !</p>
+                    <div class="flex gap-1 items-center">
+                        <p class="text-xl font-poppins font-light">4</p>
+                        <Star class="size-4" />
+                    </div>
+                </div>
+            </div>
+        </div>
 </template>
