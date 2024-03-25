@@ -11,7 +11,7 @@ import Logo from '@/components/icon/Logo.vue';
                 <logo class="w-16" color="white" />
             </RouterLink>
 
-            <ul class="flex text-lg gap-10">
+            <ul class="md:hidden flex text-lg gap-10">
                 <li>
                     <RouterLink to="/film">Films</RouterLink>
                 </li>
@@ -26,7 +26,7 @@ import Logo from '@/components/icon/Logo.vue';
                 </li>
             </ul>
 
-            <ul class="flex uppercase font-poppins gap-4">
+            <ul class="md:hidden flex uppercase font-poppins gap-4">
                 <li class="bg-white text-black rounded-sm px-2 py-1">
                     <RouterLink to="/">S'inscrire</RouterLink>
                 </li>
@@ -34,6 +34,10 @@ import Logo from '@/components/icon/Logo.vue';
                     <RouterLink to="/">Se connecter</RouterLink>
                 </li>
             </ul>
+
+            <button class="md:block lg:hidden xl:hidden  menubtn">
+                <span class="menubtn_bar"></span>
+            </button>
 
         </nav>
     </header>

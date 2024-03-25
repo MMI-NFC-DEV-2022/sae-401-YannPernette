@@ -10,7 +10,7 @@ import Logo from '@/components/icon/Logo.vue';
                 <logo class="w-20" color="white" />
             </RouterLink>
             <nav>
-                <ul class="flex text-lg gap-10 uppercase font-light tracking-wider">
+                <ul class="flex md:flex-col text-lg gap-10 md:gap-4 uppercase font-light tracking-wider">
                     <li>
                         <RouterLink to="/film">Films</RouterLink>
                     </li>
@@ -26,7 +26,7 @@ import Logo from '@/components/icon/Logo.vue';
                 </ul>
             </nav>
             <div class="w-[80%] border border-white"></div>
-            <p>© 2024 MovieSpotter Inc., Tous droits réservés</p>
+            <p class="text-center">© 2024 MovieSpotter Inc., Tous droits réservés</p>
         </div>
     </footer>
 </template>

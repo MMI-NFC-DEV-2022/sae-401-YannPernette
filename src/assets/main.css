@@ -6,47 +6,80 @@
 
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .darkenImg img {
-    transition: filter 0.3s ease;
+  transition: filter 0.3s ease;
 }
 
 .darkenImg:hover img {
-    filter: brightness(0.4);
+  filter: brightness(0.4);
 }
 
 .darkenImg:hover p {
-    opacity: 1;
+  opacity: 1;
 }
 
 .darkenImg:hover ul {
-    opacity: 1;
+  opacity: 1;
 }
 
 .bgHeader {
-    background: rgb(0, 0, 0);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0) 100%);
+  background: rgb(0, 0, 0);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 72%, rgba(0, 0, 0, 0) 100%);
 }
 
 
 @keyframes slideUp {
-    0% {
-      transform: translateY(50%);
-    }
-    50% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(50%);
-    }
+  0% {
+    transform: translateY(50%);
   }
-  
-  .slideUp {
-    animation: slideUp 2s infinite;
+
+  50% {
+    transform: translateY(0);
   }
+
+  100% {
+    transform: translateY(50%);
+  }
+}
+
+.slideUp {
+  animation: slideUp 2s infinite;
+}
+
+
+
+
+.menubtn {
+  position: absolute;
+  top: 5px;
+  right: 22px;
+  width: 40px;
+  height: 70px;
+}
+
+.menubtn_bar,
+.menubtn_bar::before,
+.menubtn_bar::after {
+  content: "";
+  background-color: white;
+  height: 5px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  border-radius: 2px;
+}
+
+.menubtn_bar::before {
+  top: -13px;
+}
+
+.menubtn_bar::after {
+  top: 13px;
+}

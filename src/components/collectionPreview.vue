@@ -37,18 +37,18 @@ if (props.id !== undefined) {
 
 
 <template>
-    <div class="flex gap-20 items-center w-fit py-6 px-10 rounded-lg border-2 border-gray-400">
+    <div class="flex md:flex-col gap-20 md:gap-10 items-center w-fit py-6 px-10 rounded-lg border-2 border-gray-400">
         <div class="w-40 flex flex-col gap-5">
             <h4 class="font-poppins text-4xl">{{ prevcollections.nom }}</h4>
             <p>{{ prevcollections.description }}</p>
         </div>
 
-        <div class="h-60 border border-gray-400"></div>
+        <div class="h-60 md:w-60 md:h-0 border border-gray-400"></div>
 
         <div>
             <ul>
-                <li class="flex gap-10">
-                    <RouterLink class="w-64" v-for="film in prevcollections.Film" :key="film.id" :to="{
+                <li class="flex flex-wrap md:justify-center gap-10">
+                    <RouterLink class="" v-for="film in prevcollections.Film" :key="film.id" :to="{
                 name: '/film/[id]',
                 params: { id: film.id },
             }">

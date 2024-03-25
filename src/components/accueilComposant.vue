@@ -27,12 +27,12 @@ const { data: Collection, error: collectionError } = await supabase
     <div class="relative overflow-hidden">
         <img class="h-screen w-full object-cover" src="/images/movie_theatre.webp" alt="Salle de cinéma - Accueil">
 
-        <div class="absolute top-[18%] left-1/2 transform -translate-x-1/2 flex items-center gap-10">
-            <Logo class="size-36" color="white" />
-            <h1 class="text-white top-20 font-sora text-7xl font-semibold">MovieSpotter</h1>
+        <div class="absolute top-[18%] left-1/2 transform -translate-x-1/2 flex items-center gap-10 md:gap-6">
+            <Logo class="size-36 md:size-24 sm:size-14" color="white" />
+            <h1 class="text-white top-20 font-sora text-7xl md:text-5xl sm:text-3xl font-semibold">MovieSpotter</h1>
         </div>
 
-        <div class="absolute top-[40%] left-1/2 transform -translate-x-1/2">
+        <div class="absolute top-[40%] md:top-[35%] sm:top-[30%] left-1/2 transform -translate-x-1/2">
             <p class="text-white text-xl font-semibold uppercase shadow-2xl text-center">Tous vos films préférés en un
                 seul endroit</p>
         </div>
@@ -45,11 +45,11 @@ const { data: Collection, error: collectionError } = await supabase
     </div>
 
 
-    <div class="mx-[10%] mb-20">
+    <div class="mx-[10%] sm:mx-[4%] mb-20">
         <h2 id="Accueil" class="pt-20 pb-10 text-3xl font-sora font-bold uppercase tracking-wider">Sélection des films
             du moment</h2>
 
-        <div class="flex flex-wrap gap-20 mb-6">
+        <div class="flex flex-wrap md:justify-center gap-20 mb-6">
             <RouterLink class="w-64" v-for="film in Film" :key="film.id" :to="{
                 name: '/film/[id]',
                 params: { id: film.id },
@@ -70,7 +70,7 @@ const { data: Collection, error: collectionError } = await supabase
             célébrités
             du moment</h2>
 
-        <div class="flex flex-wrap gap-20 mb-6">
+        <div class="flex flex-wrap md:justify-center gap-20 mb-6">
             <RouterLink class="w-64" v-for="celebrite in Celebrite" :key="celebrite.id" :to="{
                 name: '/celebrite/[id]',
                 params: { id: celebrite.id },
