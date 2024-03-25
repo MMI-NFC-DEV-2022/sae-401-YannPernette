@@ -16,7 +16,7 @@ const { data: Genre, error } = await supabase
 
         <div class="flex flex-wrap gap-10">
             <RouterLink v-for="genre in Genre" :key="genre.id" :to="{
-                name: '/film/[id]',
+                name: '/genre/[id]',
                 params: { id: genre.id },
             }">
                 <genrePreview v-bind="{ ...genre, id: genre.id.toString() }" />

@@ -2,7 +2,7 @@
 import supportPage from '@/components/supportPage.vue';
 import { useRoute } from 'vue-router/auto';
 
-const route = useRoute('/film/[id]');
+const route = useRoute('/support/[id]');
 </script>
 
 
