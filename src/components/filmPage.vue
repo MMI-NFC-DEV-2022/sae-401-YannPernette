@@ -70,9 +70,15 @@ const formatDate = (date: string | number | Date) => {
                     ({{ films.nom_original }})
                 </h4>
                 <p class="text-xl">{{ formatDate(films.date_sortie || '') }}</p>
-                <ul class="flex flex-wrap-reverse gap-4">
-                    <li class="bg-white text-black rounded-full py-1 px-3" v-for="genre in films.Genre" :key="genre.id">
-                        {{ genre.nom }}
+                <ul>
+                    <li class="flex flex-wrap-reverse gap-4">
+                        <RouterLink class="bg-white text-black rounded-full py-1 px-3" v-for="genre in films.Genre"
+                            :key="genre.id" :to="{
+            name: '/genre/[id]',
+            params: { id: genre.id },
+        }">
+                            {{ genre.nom }}
+                        </RouterLink>
                     </li>
                 </ul>
             </div>
@@ -104,10 +110,11 @@ const formatDate = (date: string | number | Date) => {
 
             <ul>
                 <li class="flex flex-wrap-reverse gap-14">
-                    <RouterLink v-for="celebrite in films.Celebrite" :key="celebrite.id" :to="{
+                    <RouterLink v-for=" celebrite  in  films.Celebrite " :key="celebrite.id" :to="{
             name: '/celebrite/[id]',
             params: { id: celebrite.id },
-        }">
+        }
+            ">
                         <celebritePreview v-bind="{ ...celebrite, id: celebrite.id.toString() }" />
                     </RouterLink>
                 </li>
@@ -122,7 +129,7 @@ const formatDate = (date: string | number | Date) => {
                     <h4 class="font-semibold text-2xl mb-8">Supports physiques</h4>
                     <ul>
                         <li class="flex flex-col gap-8">
-                            <div v-for="support in films.Support" :key="support.id">
+                            <div v-for=" support  in  films.Support " :key="support.id">
                                 <supportPreview v-if="support.is_physique"
                                     v-bind="{ ...support, id: support.id.toString() }" />
                             </div>
@@ -134,7 +141,7 @@ const formatDate = (date: string | number | Date) => {
                     <h4 class="font-semibold text-2xl mb-8">Supports digitaux</h4>
                     <ul>
                         <li class="flex flex-col">
-                            <div v-for="support in films.Support" :key="support.id">
+                            <div v-for=" support  in  films.Support " :key="support.id">
                                 <supportPreview v-if="!support.is_physique"
                                     v-bind="{ ...support, id: support.id.toString() }" />
                             </div>
