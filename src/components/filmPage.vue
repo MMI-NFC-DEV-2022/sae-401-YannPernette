@@ -98,7 +98,7 @@ const formatDate = (date: string | number | Date) => {
         </div>
     </div>
 
-    <div class="mx-[7%] mb-40">
+    <div class="mx-[10%] mb-40">
 
         <div class="mt-28 mb-16">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Synopsis</h2>
@@ -124,11 +124,11 @@ const formatDate = (date: string | number | Date) => {
         <div class="mb-20">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-8">Où regarder ce film ?</h2>
 
-            <div class="flex justify-between">
+            <div class="flex flex-col gap-8">
                 <div>
                     <h4 class="font-semibold text-2xl mb-8">Supports physiques</h4>
                     <ul>
-                        <li class="flex flex-col gap-8">
+                        <li class="flex flex-col gap-4">
                             <div v-for=" support  in  films.Support " :key="support.id">
                                 <supportPreview v-if="support.is_physique"
                                     v-bind="{ ...support, id: support.id.toString() }" />
