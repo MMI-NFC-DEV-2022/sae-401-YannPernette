@@ -4,5 +4,19 @@ Prénom : Yann
 Nom : Pernette
 
 URL du site Netflify : https://sae401-yann-pernette.netlify.app
+URL du site sur mon hébergement : https://sae401.yann-pernette.fr
+
 
 Descriptif des pages :
+Accueil
+Film : index + [id]
+Célébrité : index + [id]
+Genre : index + [id]
+Collection : index
+Support : index + [id]
+
+SITE RESPONSIVE (MOBILE ET TABLETTE)
+
+Tout est interconnecté et facilement navigable
+
+Possibilité de se connecter (avec son compte Github)
