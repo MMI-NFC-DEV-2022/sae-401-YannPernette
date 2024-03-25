@@ -21,7 +21,7 @@ import Logo from '@/components/icon/Logo.vue';
                         <RouterLink to="/collection">Collections</RouterLink>
                     </li>
                     <li>
-                        <RouterLink to="/">Genres</RouterLink>
+                        <RouterLink to="/genre">Genres</RouterLink>
                     </li>
                 </ul>
             </nav>
