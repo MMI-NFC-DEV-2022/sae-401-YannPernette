@@ -44,6 +44,7 @@ if (props.id !== undefined) {
 </script>
 
 <template>
+    <p class="text-7xl">je suis la page</p>
     <div class="flex gap-10 items-center">
         <img class="w-20" :src="prevsupports.image_type ?? ''" alt="">
         <div class="flex flex-col w-40">
@@ -54,13 +55,9 @@ if (props.id !== undefined) {
             <p class="text-xl font-poppins font-light">{{ prevsupports.note }}</p>
             <Star class="size-5" />
         </div>
-        <p v-if="prevsupports.prix_vente" class="text-xl font-light">{{ prevsupports.prix_vente }} €</p>
-        <p v-else class="text-xl font-light">{{ prevsupports.prix_location }} €</p>
+        <p class="text-xl font-light">{{ prevsupports.prix_vente }} €</p>
 
-        <RouterLink :to="{
-            name: '/support/[id]',
-            params: { id: prevsupports.id },
-        }">
+        <RouterLink to="/film">
             <div
                 class="ml-2 bg-[#FFCB47] hover:bg-black hover:text-[#FFCB47] transition-colors duration-300 rounded-md px-5 py-2 w-fit">
                 <p class="text-lg">Voir</p>
