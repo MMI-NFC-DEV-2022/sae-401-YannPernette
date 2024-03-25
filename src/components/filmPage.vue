@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Tables } from "@/supabase-types";
 import { ref } from "vue";
-import { supabase } from "@/supabase";
+import { supabase, user } from "@/supabase";
 import celebritePreview from "./celebritePreview.vue";
 import supportPreview from "./supportPreview.vue";
 import { format } from 'date-fns'
@@ -101,6 +101,13 @@ const formatDate = (date: string | number | Date) => {
     </div>
 
     <div class="mx-[10%] mb-40">
+
+        <RouterLink v-if="user" :to="{
+            name: '/film/edit/[id]',
+            params: { id: films.id },
+        }">
+            <div class="mt-28 border-2 w-fit text-3xl uppercase p-4">Editer la page</div>
+        </RouterLink>
 
         <div class="mt-28 mb-16">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Synopsis</h2>
