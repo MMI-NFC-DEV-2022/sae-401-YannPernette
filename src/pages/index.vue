@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import AccueilComposant from '../components/AccueilComposant.vue';
+import accueilComposant from '../components/accueilComposant.vue';
 </script>
 
 <template>
   <div>
-    <AccueilComposant />
+    <accueilComposant />
   </div>
 </template>

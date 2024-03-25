@@ -14,49 +14,33 @@ const props = defineProps<{
     id?: string;
 }>();
 
-const films = ref<Film & { Genre: any[] } & { Celebrite: any[] } & { Pays: any[] }>({
-    cover: null,
-    created_at: "",
-    date_sortie: null,
-    duree: null,
-    id: 0,
-    nom_original: null,
-    nom_traduit: null,
-    synopsis: null,
-    banniere: null,
-    note: null,
-    Genre: [],
-    Celebrite: [],
-    Pays: [],
-    bande_originale: null,
-    trailer: null,
-    pays: null
+const films = ref<Film & { Genre: any[] } & { Celebrite: any[] }>({
+cover: null,
+created_at: "",
+date_sortie: null,
+duree: null,
+id: 0,
+nom_original: null,
+nom_traduit: null,
+synopsis: null,
+banniere: null,
+note: null,
+Genre: [],
+Celebrite: [],
+bande_originale: null,
+trailer: null,
+pays: null,
+Pays: {
+id: 0,
+nom: "",
+drapeau: null
+}
 });
 
 if (props.id !== undefined) {
-    const { data, error } = await supabase.from("Film").select(`
-  id,
-  nom_traduit,
-  nom_original,
-  cover,
-  banniere,
-  date_sortie,
-  duree,
-  note,
-  synopsis, 
-  trailer,
-  bande_originale,
-  Pays ( id, nom, drapeau ),
-  Genre ( id, nom ),
-  Celebrite ( id, prenom, nom, portrait )
-`)
-        .eq("id", props.id).single();
+    const { data, error } = await supabase.from("Film").select(`*, Genre ( * ), Celebrite ( * ), Pays ( * )`).eq("id", props.id).single();
     if (error) console.error("error", error);
-    else films.value = {
-        ...data,
-        created_at: "",
-        pays: null,
-    };
+    else films.value = data as unknown as Film & { Genre: any[] } & { Celebrite: any[] } & { Pays: any[] };
 }
 
 
@@ -93,7 +77,7 @@ const formatDate = (date: string | number | Date) => {
 
             <div class="flex flex-col gap-6">
                 <div class="flex gap-4 items-center">
-                    <img class="w-10" :src="films.Pays.drapeau ?? undefined" alt="">
+                    <img class="w-10" :src="(films.Pays.drapeau) || undefined" alt="">
                     <p>{{ films.Pays.nom }}</p>
                 </div>
                 <div class="flex gap-2 items-center font-light text-lg">

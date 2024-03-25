@@ -7,8 +7,13 @@ import collectionPreview from "@/components/collectionPreview.vue";
 
 import { supabase } from "@/supabase";
 console.log("supabase :", supabase); // pour vérifier et "garder" supabase dans le code
-const { data: Accueil, error } = await supabase
-    .from('Film', 'Celebrite')
+const { data: Film, error: filmError } = await supabase
+    .from('Film')
+    .select('*')
+    .limit(3);
+
+    const { data: Celebrite, error: celebriteError } = await supabase
+    .from('Celebrite')
     .select('*')
     .limit(3);
 
@@ -45,7 +50,7 @@ const { data: Collection, error: collectionError } = await supabase
             du moment</h2>
 
         <div class="flex flex-wrap gap-20 mb-6">
-            <RouterLink class="w-64" v-for="film in Accueil" :key="film.id" :to="{
+            <RouterLink class="w-64" v-for="film in Film" :key="film.id" :to="{
                 name: '/film/[id]',
                 params: { id: film.id },
             }">
@@ -66,7 +71,7 @@ const { data: Collection, error: collectionError } = await supabase
             du moment</h2>
 
         <div class="flex flex-wrap gap-20 mb-6">
-            <RouterLink class="w-64" v-for="celebrite in Accueil" :key="celebrite.id" :to="{
+            <RouterLink class="w-64" v-for="celebrite in Celebrite" :key="celebrite.id" :to="{
                 name: '/celebrite/[id]',
                 params: { id: celebrite.id },
             }">

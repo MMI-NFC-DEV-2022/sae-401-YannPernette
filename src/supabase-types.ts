@@ -225,6 +225,11 @@ export type Database = {
           nom_traduit: string | null
           note: number | null
           pays: number | null
+          Pays: {
+            id: number | null;
+            nom: string | null;
+            drapeau: string | null;
+          };
           synopsis: string | null
           trailer: string | null
         }

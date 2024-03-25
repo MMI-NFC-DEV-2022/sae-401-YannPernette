@@ -24,31 +24,18 @@ banniere: null,
 note: null,
 bande_originale: null,
 pays: null,
-trailer: null
+trailer: null,
+Pays: {
+id: 0,
+nom: "",
+drapeau: null
+}
 });
 
 if (props.id !== undefined) {
-    const { data, error } = await supabase.from("Film").select(`
-  id,
-  nom_traduit,
-  cover,
-  synopsis, 
-  Genre ( id, nom )
-`)
-        .eq("id", props.id).single();
+    const { data, error } = await supabase.from("Film").select(`*, Genre ( * ), Pays ( * )`).eq("id", props.id).single();
     if (error) console.error("error", error);
-    else prevfilms.value = {
-        ...data,
-        created_at: "",
-        date_sortie: null,
-        duree: null,
-        nom_original: null,
-        banniere: null,
-        note: null,
-        bande_originale: null,
-        pays: null,
-        trailer: null
-    };
+    else prevfilms.value = data as unknown as Film & { Genre: any[] } & { Pays: any[] };
 }
 </script>
 
