@@ -77,10 +77,10 @@ if (props.id !== undefined) {
                 </div>
             </a>
 
-            <a v-else="prevsupports.prix_vente" target="_blank" :href="prevsupports.lien_location ?? ''">
+            <a v-else target="_blank" :href="prevsupports.lien_location ?? ''">
                 <div
                     class="ml-2 border-2 border-[#FFCB47] hover:bg-[#FFCB47] hover:text-black transition-colors duration-300 rounded-md px-5 py-2 w-fit">
-                    <p class="text-lg">Acheter</p>
+                    <p class="text-lg">Louer</p>
                 </div>
             </a>
         </div>
