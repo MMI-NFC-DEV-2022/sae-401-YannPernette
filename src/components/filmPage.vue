@@ -57,10 +57,10 @@ const formatDate = (date: string | number | Date) => {
 
 <template>
 
-    <div class="h-[30%] relative">
-        <img class="w-screen h-96 object-cover brightness-50" :src="films.banniere || undefined" alt="">
+    <div class="h-[30%] md:h-[50%] relative">
+        <img class="w-screen h-96 md:h-[53rem] object-cover brightness-50" :src="films.banniere || undefined" alt="">
 
-        <div class="absolute bottom-0 w-full justify-center flex gap-20 items-center text-white">
+        <div class="absolute bottom-0 w-full justify-center flex md:flex-col gap-20 items-center text-white">
             <div class="mb-[-65px] z-20">
                 <img class="h-72" :src="films.cover || undefined" alt="">
             </div>
@@ -94,7 +94,7 @@ const formatDate = (date: string | number | Date) => {
                     <Horloge class="w-10" />
                     <p>{{ films.duree }}</p>
                 </div>
-                <p class="text-4xl font-sora border-2 py-3 px-4 rounded-lg">{{ films.note }} <span
+                <p class="text-4xl font-sora border-2 py-3 px-4 md:mb-4 rounded-lg">{{ films.note }} <span
                         class="text-lg font-light">/ 10</span></p>
             </div>
         </div>
@@ -104,7 +104,7 @@ const formatDate = (date: string | number | Date) => {
 
         <div class="mt-28 mb-16">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Synopsis</h2>
-            <p class="max-w-[70%]">{{ films.synopsis }}</p>
+            <p class="max-w-[70%] md:max-w-full">{{ films.synopsis }}</p>
         </div>
 
         <div class="mb-20">
@@ -126,7 +126,7 @@ const formatDate = (date: string | number | Date) => {
         <div class="mb-20">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-8">Où regarder ce film ?</h2>
 
-            <div class="flex flex-col gap-8">
+            <div class="flex flex-col md:items-center gap-8">
                 <div>
                     <h4 class="font-semibold text-2xl mb-8">Supports physiques</h4>
                     <ul>
@@ -153,8 +153,8 @@ const formatDate = (date: string | number | Date) => {
             </div>
         </div>
 
-        <div class="flex justify-between mb-20">
-            <div class="w-[50%]">
+        <div class="flex md:flex-col justify-between md:justify-center mb-20 md:gap-20">
+            <div class="w-[50%] md:w-full">
                 <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Trailer</h2>
                 <iframe width="100%" height="400" :src="films.trailer ?? undefined" title="YouTube video player"
                     frameborder="0"
@@ -162,7 +162,7 @@ const formatDate = (date: string | number | Date) => {
                     allowfullscreen></iframe>
             </div>
 
-            <div class="w-[40%]">
+            <div class="w-[40%] md:w-full">
                 <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Bande originale</h2>
                 <iframe :src="films.bande_originale ?? undefined" width="100%" height="400" frameborder="0"
                     allowtransparency="true"></iframe>
@@ -172,7 +172,7 @@ const formatDate = (date: string | number | Date) => {
         <div>
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Avis de la communauté</h2>
 
-            <div class="flex gap-10">
+            <div class="flex  md:flex-col gap-10">
                 <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
                     <div class="flex gap-4">
                         <User class="border border-black rounded-full size-10" />

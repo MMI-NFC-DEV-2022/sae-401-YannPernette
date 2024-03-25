@@ -48,8 +48,8 @@ if (props.id !== undefined) {
 </script>
 
 <template>
-    <div class="flex gap-28 items-center border-2 px-10 py-4 rounded-xl w-fit">
-        <div class="flex gap-10 items-center">
+    <div class="flex md:flex-col gap-28 md:gap-10 items-center border-2 px-10 py-4 rounded-xl w-fit">
+        <div class="flex md:flex-col gap-10 md:gap-4 items-center">
             <img class="w-20" :src="prevsupports.image_type ?? ''" alt="">
             <div class="flex flex-col w-40">
                 <p class="font-medium text-lg leading-tight">{{ prevsupports.type }}</p>

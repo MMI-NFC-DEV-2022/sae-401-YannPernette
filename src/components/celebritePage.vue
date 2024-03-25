@@ -39,7 +39,7 @@ const formatDate = (date: string | number | Date) => {
 
 
 <template>
-    <div class="pt-32 flex justify-center items-center gap-20">
+    <div class="pt-32 flex md:flex-col md:mx-[10%] justify-center items-center gap-20">
         <img class="w-60 rounded-lg" :src="celebrites.portrait || undefined" alt="">
         <div>
             <h1 class="font-sora font-semibold text-5xl mb-5">{{ celebrites.prenom }} {{ celebrites.nom }}</h1>

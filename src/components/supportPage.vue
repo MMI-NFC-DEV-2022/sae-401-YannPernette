@@ -56,7 +56,7 @@ const formatDate = (date: string | number | Date) => {
 </script>
 
 <template>
-    <div class="flex justify-center items-center gap-24">
+    <div class="flex md:flex-col md:mx-[10%] justify-center items-center gap-24">
         <div class="flex flex-col gap-3 items-center">
             <div class="relative flex flex-col items-center">
                 <img class="w-60 rounded-t-lg" :src="supports.Film.cover ?? ''" alt="">
@@ -130,7 +130,7 @@ const formatDate = (date: string | number | Date) => {
     <div class="mx-[10%] mt-28">
             <h2 class="font-poppins font-semibold text-3xl uppercase mb-6">Avis de la communauté</h2>
 
-            <div class="flex gap-10">
+            <div class="flex md:flex-col gap-10">
                 <div class="flex flex-col border p-4 gap-5 rounded-lg w-fit">
                     <div class="flex gap-4">
                         <User class="border border-black rounded-full size-10" />

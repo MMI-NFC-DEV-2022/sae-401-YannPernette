@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from '@/components/icon/Logo.vue';
+import { supabase, user } from '@/supabase';
 </script>
 
 <template>
@@ -31,7 +32,8 @@ import Logo from '@/components/icon/Logo.vue';
                     <RouterLink to="/">S'inscrire</RouterLink>
                 </li>
                 <li class="border rounded-sm px-3 py-1">
-                    <RouterLink to="/">Se connecter</RouterLink>
+                    <button v-if="!user" @pointerdown="supabase.auth.signInWithOAuth({ provider: 'github' })">Se connecter</button>
+                    <button class="uppercase" v-else>Connecté</button>
                 </li>
             </ul>
 
